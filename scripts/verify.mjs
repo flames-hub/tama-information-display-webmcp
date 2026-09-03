@@ -26,10 +26,10 @@ const required = [
   "web/nara-go/index.html",
   "web/nara-go/simple.html",
   "web/nara-go/assets/styles.css",
-  "web/nara-go/assets/app.js",
+  "web/nara-go/assets/app-public.js",
   "web/nara-go/assets/simple.css",
-  "web/nara-go/assets/simple.js",
-  "web/nara-go/data/timetables.json",
+  "web/nara-go/assets/simple-public.js",
+  "web/nara-go/data/timetables-public.json",
   "web/nara-go/SOURCE.md",
   "README.md",
   "OPERATIONS.md",
@@ -96,6 +96,19 @@ for (const image of catalogImages) {
   }
 }
 
+const publicTimetablePath = join(root, "web/nara-go/data/timetables-public.json");
+const publicTimetableText = readFileSync(publicTimetablePath, "utf8");
+const publicTimetable = JSON.parse(publicTimetableText);
+if (publicTimetable.dataset !== "synthetic-challenge-sample") errors.push("public timetable must be the synthetic challenge sample");
+if (typeof publicTimetable.warning !== "string" || !publicTimetable.warning.trim()) errors.push("public timetable warning is required");
+for (const [label, value] of [
+  ["verified", publicTimetable.verified],
+  ["narakotsu revision", publicTimetable.narakotsu?.revision],
+  ["kashibus revision", publicTimetable.kashibus?.revision]
+]) {
+  if (value !== "2026-09-03") errors.push(`${label} must match the public sample release date`);
+}
+
 const index = readFileSync(join(root, "index.html"), "utf8");
 if (!index.includes('data-screen="ambient"')) errors.push("ambient screen missing");
 if (!index.includes('data-screen="weather"')) errors.push("weather screen missing");
@@ -107,20 +120,32 @@ if (!index.includes('id="webmcp-debug"') || !index.includes('hidden aria-label="
 if (!index.includes('id="ambient-type"')) errors.push("ambient type selector missing");
 if (!index.includes('id="background-grid"')) errors.push("background review grid missing");
 if (!index.includes('id="background-preview"')) errors.push("background preview dialog missing");
+if (!index.includes('href="https://open-meteo.com/"') || !index.includes("Weather data by Open-Meteo.com")) errors.push("visible Open-Meteo attribution link missing");
 
 const normalCopy = readFileSync(join(root, "web/nara-go/index.html"), "utf8");
 const simpleCopy = readFileSync(join(root, "web/nara-go/simple.html"), "utf8");
 if (!normalCopy.includes('href="./simple.html"')) errors.push("normal to simple mode switch missing");
 if (!simpleCopy.includes('href="./"')) errors.push("simple to normal mode switch missing");
+if (!normalCopy.includes('./assets/app-public.js?v=20260903-r10')) errors.push("normal public consumer path missing");
+if (!simpleCopy.includes('./assets/simple-public.js?v=20260903-r10')) errors.push("simple public consumer path missing");
 
 const sourceFiles = [
   "js/app-v0.4-r9.js", "js/config-v0.4.js", "js/router-v0.4.js", "js/gestures.js", "js/ambient-v0.3.js", "js/weather.js", "js/webview-v0.4.js", "js/display-controller-v0.4.js", "js/webmcp-adapter-v0.4.js", "js/background-library-v0.3.js", "sw.js",
-  "web/nara-go/assets/app.js", "web/nara-go/assets/simple.js", "web/nara-go/assets/embed.js"
+  "web/nara-go/assets/app-public.js", "web/nara-go/assets/simple-public.js", "web/nara-go/assets/embed.js"
 ];
 for (const path of sourceFiles) {
   const result = spawnSync(process.execPath, ["--check", join(root, path)], { encoding: "utf8" });
   if (result.status !== 0) errors.push(`syntax: ${path}: ${(result.stderr || result.stdout).trim()}`);
 }
+
+const publicNaraGoSources = ["web/nara-go/assets/app-public.js", "web/nara-go/assets/simple-public.js"]
+  .map((path) => readFileSync(join(root, path), "utf8"))
+  .join("\n");
+if (!publicNaraGoSources.includes("Public build refused non-synthetic timetable data")) errors.push("public timetable consumer must fail closed");
+
+const serviceWorker = readFileSync(join(root, "sw.js"), "utf8");
+if (!serviceWorker.includes('CACHE_NAME = "tama-info-v0.4.0-r10-synthetic"')) errors.push("synthetic release cache name missing");
+if (serviceWorker.includes("caches.match(request")) errors.push("service worker must not search stale caches across releases");
 
 const adapter = readFileSync(join(root, "js/webmcp-adapter-v0.4.js"), "utf8");
 if (!adapter.includes('documentRef?.modelContext')) errors.push("WebMCP feature detection missing");

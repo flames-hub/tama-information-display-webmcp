@@ -1,4 +1,5 @@
-const DATA_URL = './data/timetables.json?v=20260815-2';
+const DATA_URL = './data/timetables-public.json?v=20260903-r10';
+const PUBLIC_DATASET = 'synthetic-challenge-sample';
 
 const state = {
   data: null,
@@ -324,7 +325,11 @@ function bindEvents() {
 async function init() {
   const response = await fetch(DATA_URL, { cache: 'no-store' });
   if (!response.ok) throw new Error(`Data load failed: ${response.status}`);
-  state.data = await response.json();
+  const payload = await response.json();
+  if (payload?.dataset !== PUBLIC_DATASET || typeof payload.warning !== 'string' || !payload.warning.trim()) {
+    throw new Error('Public build refused non-synthetic timetable data');
+  }
+  state.data = payload;
   const today = new Date();
   state.selectedDate = today;
   $('#serviceDate').value = isoDate(today);

@@ -1,5 +1,5 @@
 const CACHE_PREFIX = "tama-info-";
-const CACHE_NAME = "tama-info-v0.4.0-r9";
+const CACHE_NAME = "tama-info-v0.4.0-r10-synthetic";
 const PRECACHE = [
   "./",
   "./index.html",
@@ -26,12 +26,12 @@ const PRECACHE = [
   "./web/nara-go/icon.svg",
   "./web/nara-go/manifest.webmanifest",
   "./web/nara-go/assets/styles.css",
-  "./web/nara-go/assets/app.js",
+  "./web/nara-go/assets/app-public.js",
   "./web/nara-go/assets/simple.css",
-  "./web/nara-go/assets/simple.js",
+  "./web/nara-go/assets/simple-public.js",
   "./web/nara-go/assets/embed.css",
   "./web/nara-go/assets/embed.js",
-  "./web/nara-go/data/timetables.json"
+  "./web/nara-go/data/timetables-public.json"
 ];
 
 self.addEventListener("install", (event) => {
@@ -61,25 +61,25 @@ self.addEventListener("fetch", (event) => {
 });
 
 async function cacheFirst(request) {
-  const cached = await caches.match(request, { ignoreSearch: true });
+  const cache = await caches.open(CACHE_NAME);
+  const cached = await cache.match(request, { ignoreSearch: true });
   if (cached) return cached;
   const response = await fetch(request);
   if (response.ok) {
-    const cache = await caches.open(CACHE_NAME);
     cache.put(request, response.clone());
   }
   return response;
 }
 
 async function networkFirst(request, fallbackPath) {
+  const cache = await caches.open(CACHE_NAME);
   try {
     const response = await fetch(request);
     if (response.ok) {
-      const cache = await caches.open(CACHE_NAME);
       cache.put(request, response.clone());
     }
     return response;
   } catch {
-    return (await caches.match(request, { ignoreSearch: true })) || caches.match(fallbackPath);
+    return (await cache.match(request, { ignoreSearch: true })) || cache.match(fallbackPath);
   }
 }

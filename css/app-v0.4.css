@@ -628,10 +628,22 @@ a {
 
 .weather-current__details span,
 .forecast-section__heading span,
+.forecast-section__heading .data-attribution,
 .settings-group p {
   color: var(--muted);
   font-size: clamp(11px, 0.78vw, 14px);
   line-height: 1.7;
+}
+
+.forecast-section__heading .data-attribution {
+  text-decoration: underline;
+  text-decoration-color: rgba(136, 205, 195, 0.42);
+  text-underline-offset: 0.24em;
+}
+
+.forecast-section__heading .data-attribution:hover,
+.forecast-section__heading .data-attribution:focus-visible {
+  color: var(--accent);
 }
 
 .weather-current__details strong {

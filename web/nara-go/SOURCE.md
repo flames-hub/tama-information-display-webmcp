@@ -4,7 +4,7 @@ This Challenge repository contains a runnable copy of the NARA/GO interface for
 demonstrating TAMA Information Display's normal and simple iframe modes.
 
 - Interface snapshot date: 2026-09-03
-- Public sample data: `data/timetables.json`
+- Public sample data: `data/timetables-public.json`
 - Dataset marker: `synthetic-challenge-sample`
 - Original live service: <https://tama-hub.xvps.jp/nara-go/>
 

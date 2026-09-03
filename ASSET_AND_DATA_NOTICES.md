@@ -14,10 +14,10 @@ Three earlier abstract images without a repository-local provenance record (`nar
 
 ## NARA/GO demonstration data
 
-`web/nara-go/data/timetables.json` in this public repository contains an explicitly fictional, synthetic schedule. It exists only so the normal/simple interface and WebMCP navigation can be run locally. **Do not use it for travel.**
+`web/nara-go/data/timetables-public.json` in this public repository contains an explicitly fictional, synthetic schedule. It exists only so the normal/simple interface and WebMCP navigation can be run locally. **Do not use it for travel.** The public consumers reject any dataset that is not explicitly marked `synthetic-challenge-sample`.
 
 The live service can be opened separately at <https://tama-hub.xvps.jp/nara-go/>. Third-party timetable data is not copied into this public Git history.
 
 ## Runtime data
 
-The Weather screen fetches current data through the included PHP proxy from Open-Meteo. Review Open-Meteo’s current terms and attribution requirements before operating a derivative service.
+The Weather screen fetches current data through the included PHP proxy from [Open-Meteo](https://open-meteo.com/). Weather data is licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). The proxy selects and rounds forecast fields for display, adds fetch/cache metadata, keeps a 10-minute server cache, and may use a stale response for up to six hours during an upstream outage. The on-screen weather view includes a visible Open-Meteo attribution link.
