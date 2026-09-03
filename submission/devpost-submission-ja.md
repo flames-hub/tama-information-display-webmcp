@@ -75,7 +75,7 @@ WebMCPは実験段階のため、任意機能がアプリ起動の依存にな�
 
 - Live URL: https://tama-hub.xvps.jp/tama-info/
 - Repository: https://github.com/flames-hub/tama-information-display-webmcp
-- Demo video: **YOUTUBE_PUBLIC_URL_PENDING**
+- Demo video: https://youtu.be/wFJha9o_dk4
 
 ## Challenge期間中の変更
 

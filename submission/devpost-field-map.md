@@ -28,7 +28,7 @@ https://tama-hub.xvps.jp/tama-info/
 https://github.com/flames-hub/tama-information-display-webmcp
 
 **Demo video**
-`YOUTUBE_PUBLIC_URL_PENDING`
+https://youtu.be/wFJha9o_dk4
 
 ## Challenge questions
 

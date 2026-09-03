@@ -1,0 +1,30 @@
+What if an AI agent could control a shared display without overruling the person using it?
+
+TAMA Information Display turns a 4K OLED touchscreen into a calm, shared surface for people and agents. The original touch interface remains fully usable, while WebMCP exposes seven structured tools that reuse the same application logic.
+
+This working demo uses typed requests to:
+
+• show the weather in Nara
+• open the embedded NARA/GO transport view
+• display a 1:00 PM meeting notice
+• return to the viewer's selected ambient scene
+
+The key rule is simple:
+
+Human action first, followed by agent action, then automatic state.
+
+If someone touches the display after an agent action, TAMA protects the person's newer choice. Agent timers and undo cannot force the screen back. Browsers without WebMCP continue to use the complete manual interface normally.
+
+Try the live app:
+https://tama-hub.xvps.jp/tama-info/
+
+Source code (MIT):
+https://github.com/flames-hub/tama-information-display-webmcp
+
+Built for the OpenAI WebMCP Challenge:
+https://openai.com/webmcp-challenge/
+
+No login or API key is required.
+Weather data: Open-Meteo
+Narration: Microsoft Zira text-to-speech
+Music: None

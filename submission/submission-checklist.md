@@ -8,7 +8,7 @@ Judging ends: **2026-09-21 17:00 PT**
 | Requirement | Required | Ready | Needs human action | Evidence / URL |
 | --- | --- | --- | --- | --- |
 | Eligible entrant and no disqualifying conflict | Yes | Not machine-verifiable | Yes — entrant confirms in Devpost | [Official Rules §3](https://webmcp.devpost.com/rules) |
-| Joined the challenge on Devpost | Yes | Not machine-verifiable without account access | Yes — log in / join if needed | [Challenge page](https://webmcp.devpost.com/) |
+| Joined the challenge on Devpost | Yes | Yes — project draft reached finalization | No | [Challenge page](https://webmcp.devpost.com/) |
 | Working WebMCP-powered web app | Yes | Yes — production verified | No | [Live app](https://tama-hub.xvps.jp/tama-info/), `js/webmcp-adapter-v0.4.js` |
 | Working live URL | Yes | Yes — HTTP 200 | No | <https://tama-hub.xvps.jp/tama-info/> |
 | ChatGPT in-app browser or WebMCP-enabled Chrome 149+ access | Yes | Yes — ChatGPT in-app browser verified | No | Native browser report: `AVAILABLE / 7/7` |
@@ -20,16 +20,16 @@ Judging ends: **2026-09-21 17:00 PT**
 | Source, assets, setup instructions | Yes | Yes | No | `README.md`, source tree |
 | Detectable open-source license | Yes | Yes — GitHub detects MIT | No | [LICENSE](https://github.com/flames-hub/tama-information-display-webmcp/blob/main/LICENSE) |
 | Challenge-period work distinguished | Required for pre-existing projects | Yes — clean dated commits and docs | No | [Commit history](https://github.com/flames-hub/tama-information-display-webmcp/commits/main/), `CHANGELOG.md` |
-| Secrets / credentials absent | Yes | Yes — reachable-history and tracked-file scan passed | No | Clean four-commit Challenge history |
+| Secrets / credentials absent | Yes | Yes — reachable-history and tracked-file scan passed | No | Clean five-commit Challenge history |
 | English description covers fit, UX, collaboration, implementation | Yes | Yes | No | `submission/devpost-submission-en.md` |
 | Demo video under 3 minutes | Yes | Yes — **2:18.02** | No | Local deliverable `submission/challenge-demo-final.mp4`; SHA-256 `D08E86E3…02069` |
 | Video clearly shows the project functioning | Yes | Yes — 4 typed requests and 5 successful real tool calls | No | Weather → NARA/GO → 13:00 meeting → Ambient |
 | Video audio explains project and WebMCP | Yes | Yes — English TTS, AAC 48 kHz | No | `challenge-demo-narration-en.md` |
-| Video publicly visible on YouTube | Yes | **No** | **Yes — upload and confirm Public** | `youtube-title-description.md`; URL pending |
-| YouTube URL entered in Devpost | Yes | **No** | **Yes — paste issued URL** | Devpost form |
+| Video publicly visible on YouTube | Yes | Yes — Public, playable, not Unlisted | No | <https://youtu.be/wFJha9o_dk4> |
+| YouTube URL entered in Devpost | Yes | Yes — draft reached finalization | No | <https://youtu.be/wFJha9o_dk4> |
 | No unlicensed music or third-party video material | Yes | Yes — no BGM/logos/stock; documented generated background only | No | Video QA and `ASSET_AND_DATA_NOTICES.md` |
 | English submission or English translation | Yes | Yes | No | English story, narration, burned captions, SRT |
-| Devpost fields completed | Yes | Copy-ready text and thumbnail complete | Yes — authenticated personal/form fields | `devpost-field-map.md`, `project-thumbnail.png` |
+| Devpost fields completed | Yes | Yes — required draft fields accepted and finalization reached | Yes — final review only | `devpost-field-map.md`, `project-thumbnail.png` |
 | Terms / Official Rules accepted | Yes | **No** | **Yes — personal legal consent** | Devpost form |
 | Final Submit before deadline | Yes | **No** | **Yes — final personal action** | Devpost form |
 | Freeze submission/repo/live site after deadline | Yes per official FAQ | Procedure documented | Yes — observe freeze after Submit | `submission/README.md` |

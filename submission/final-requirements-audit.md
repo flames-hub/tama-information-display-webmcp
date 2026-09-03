@@ -23,10 +23,10 @@ Deadline: **2026-09-04 05:00 JST** (2026-09-03 13:00 PDT)
 | English explanatory audio | PASS | OS TTS, AAC-LC 48kHz stereo. |
 | English translation/captions | PASS | Narration-matched burned subtitles plus SRT. |
 | No unauthorized music or added third-party video | PASS | No BGM, external stock, or logos; the recorded background is documented `town-01`. |
-| Public YouTube demo URL | **FAIL — HUMAN ACTION** | Upload-ready MP4 and metadata exist; entrant must publish as **Public** and copy the URL. |
-| Devpost entrant eligibility / challenge join | **FAIL — HUMAN ACTION** | Entrant must authenticate and personally confirm eligibility. |
+| Public YouTube demo URL | PASS | Public, playable, and reported `isUnlisted=false`: <https://youtu.be/wFJha9o_dk4>. |
+| Devpost challenge join and completed draft | PASS | The authenticated project reached the finalization screen with required draft fields accepted. |
 | Devpost Terms acceptance | **FAIL — HUMAN ACTION** | Personal legal consent cannot be automated. |
-| YouTube URL entered and final Submit | **FAIL — HUMAN ACTION** | Paste the issued URL, review, and press Submit before the deadline. |
+| Devpost final Submit | **FAIL — HUMAN ACTION** | Review the final declaration and press Submit before the deadline. |
 
 ## Corrective work completed during the final audit
 
@@ -44,12 +44,14 @@ Deadline: **2026-09-04 05:00 JST** (2026-09-03 13:00 PDT)
 - Added a request-revision guard and regression test so a late legacy background load cannot overwrite the selected Ambient type; deployed the two-file r11 patch with a targeted backup.
 - Rebuilt the final video from the public synthetic repository and verified the NARA/GO warning plus the selected `town-01` Ambient frame.
 - Rechecked the live UI at 1920×1080 and 375×812 with zero horizontal overflow, console errors, or page errors.
+- Published and externally verified the 2:18 demo on YouTube as Public, playable, and not Unlisted.
+- Completed the Devpost draft through its finalization screen with the live app, repository, and video URLs entered.
 
 ## Final verdict
 
-All machine-actionable requirements are **PASS**. The only remaining FAIL items require the entrant's account, legal consent, or final publication action:
+All machine-actionable requirements are **PASS**. The only remaining FAIL items require the entrant's personal legal consent and final submission action:
 
-1. Public YouTube upload.
-2. Devpost login/eligibility/Terms, YouTube URL, and final Submit.
+1. Read and accept the Official Rules and Devpost Terms on the finalization screen.
+2. Press the final Devpost Submit button before the deadline.
 
 Official sources: [OpenAI WebMCP Challenge](https://openai.com/webmcp-challenge/), [Devpost Official Rules](https://webmcp.devpost.com/rules), [Challenge FAQ](https://webmcp.devpost.com/resources).

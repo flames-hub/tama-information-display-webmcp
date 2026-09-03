@@ -6,7 +6,8 @@ This directory contains the submission-ready materials for **TAMA Information Di
 - `devpost-submission-en.md` — English Devpost story, ready to paste
 - `devpost-submission-ja.md` — Japanese reference translation
 - `devpost-field-map.md` — field-by-field entry guide
-- `youtube-title-description.md` — YouTube title and description
+- `youtube-title.txt` / `youtube-description.txt` — paste-ready YouTube fields
+- `youtube-title-description.md` — operator-only upload note; do not paste as the description
 - `challenge-demo-final.mp4` — final demo video, under three minutes
 - `challenge-demo-en.srt` — English captions matching the narration
 - `challenge-demo-narration-en.md` — exact English TTS narration

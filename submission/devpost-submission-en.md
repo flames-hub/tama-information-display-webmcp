@@ -93,7 +93,7 @@ Next steps include optional authenticated multi-display coordination, user-appro
 
 - Live URL: https://tama-hub.xvps.jp/tama-info/
 - Public repository: https://github.com/flames-hub/tama-information-display-webmcp
-- Demo video: **YOUTUBE_PUBLIC_URL_PENDING**
+- Demo video: https://youtu.be/wFJha9o_dk4
 - Testing instructions: open the live URL in ChatGPT’s in-app browser, ask it to show Nara weather, NARA/GO, a short information message, and then Ambient. No account or credentials are required.
 
 ## Challenge-period work
