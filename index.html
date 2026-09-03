@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#050708">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="普段は美しいAmbient Display、触るとInformation OS。">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; frame-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+  <title>TAMA Information Display</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./assets/icons/app-icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./css/app-v0.4.css">
+</head>
+<body>
+  <div class="boot-screen" id="boot-screen" aria-hidden="true">
+    <span class="boot-mark">T</span>
+  </div>
+
+  <div class="app-shell" id="app" data-screen="ambient">
+    <div class="ambient-backdrop" aria-hidden="true">
+      <div class="ambient-backdrop__layer is-visible" data-background-layer="0"></div>
+      <div class="ambient-backdrop__layer" data-background-layer="1"></div>
+      <div class="ambient-backdrop__shade"></div>
+      <div class="ambient-backdrop__grain"></div>
+    </div>
+
+    <header class="system-bar" aria-label="システムステータス">
+      <button class="wordmark" type="button" data-route="information-os" aria-label="Information OSを開く">
+        <span class="wordmark__glyph">T</span>
+        <span class="wordmark__text">TAMA / 01</span>
+      </button>
+      <div class="system-status">
+        <span class="network-state" id="network-state" role="status">ONLINE</span>
+        <span class="system-status__separator" aria-hidden="true"></span>
+        <span id="system-time-compact">--:--</span>
+      </div>
+    </header>
+
+    <main class="screen-stack" id="screen-stack">
+      <section class="screen screen--ambient is-active" id="screen-ambient" data-screen="ambient" aria-labelledby="ambient-heading">
+        <h1 class="sr-only" id="ambient-heading">Ambient</h1>
+        <div class="ambient-place">
+          <span class="eyebrow" id="ambient-type-label">AMBIENT · CURATED</span>
+          <span class="ambient-place__line"></span>
+        </div>
+
+        <div class="ambient-clock" data-pixel-shift>
+          <time class="ambient-clock__time" id="ambient-time">--:--</time>
+          <div class="ambient-clock__meta">
+            <time id="ambient-date">----年--月--日</time>
+            <span class="ambient-clock__weather"><span id="ambient-weather-symbol" aria-hidden="true">—</span><span id="ambient-weather-label">天気情報を取得中</span></span>
+          </div>
+        </div>
+
+        <div class="ambient-temperature" aria-live="polite">
+          <span class="ambient-temperature__value" id="ambient-temperature">--</span>
+          <span class="ambient-temperature__degree">°</span>
+          <span class="ambient-temperature__range" id="ambient-temperature-range">H --° / L --°</span>
+        </div>
+
+        <button class="gesture-cue" type="button" data-route="information-os">
+          <span class="gesture-cue__line"></span>
+          <span>SWIPE UP · OPEN OS</span>
+        </button>
+      </section>
+
+      <section class="screen screen--weather" id="screen-weather" data-screen="weather" aria-labelledby="weather-heading" aria-hidden="true">
+        <div class="content-frame weather-layout">
+          <header class="section-heading">
+            <div>
+              <span class="eyebrow">LIVE WEATHER · NARA</span>
+              <h1 id="weather-heading">空の現在地</h1>
+            </div>
+            <button class="icon-button" type="button" id="weather-refresh" aria-label="天気を更新">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7v5h-5M4 17v-5h5M6.1 8.1A7 7 0 0 1 18.6 7M17.9 15.9A7 7 0 0 1 5.4 17"/></svg>
+            </button>
+          </header>
+
+          <div class="weather-error" id="weather-error" role="status" hidden>
+            <span class="weather-error__mark">!</span>
+            <div><strong>天気情報を取得できません</strong><span>時計とAmbient表示はそのまま利用できます。</span></div>
+          </div>
+
+          <div class="weather-current" id="weather-current" aria-live="polite">
+            <div class="weather-current__primary">
+              <span class="weather-current__symbol" id="weather-symbol" aria-hidden="true">—</span>
+              <div>
+                <span class="weather-current__temperature" id="weather-temperature">--<small>°</small></span>
+                <p id="weather-description">読み込み中</p>
+              </div>
+            </div>
+            <div class="weather-current__details">
+              <div><span>最高 / 最低</span><strong id="weather-high-low">--° / --°</strong></div>
+              <div><span>降水確率</span><strong id="weather-precipitation">--%</strong></div>
+              <div><span>体感温度</span><strong id="weather-apparent">--°</strong></div>
+              <div><span>風</span><strong id="weather-wind">-- km/h</strong></div>
+            </div>
+          </div>
+
+          <section class="forecast-section" aria-labelledby="hourly-heading">
+            <div class="forecast-section__heading">
+              <h2 id="hourly-heading">この先12時間</h2>
+              <span id="weather-updated">更新待ち</span>
+            </div>
+            <div class="hourly-strip" id="hourly-forecast" data-gesture-lock tabindex="0" aria-label="時間別予報"></div>
+          </section>
+
+          <section class="forecast-section forecast-section--week" aria-labelledby="weekly-heading">
+            <div class="forecast-section__heading"><h2 id="weekly-heading">7日間</h2><span>Open-Meteo</span></div>
+            <div class="weekly-list" id="weekly-forecast"></div>
+          </section>
+        </div>
+      </section>
+
+      <section class="screen screen--web" id="screen-web" data-screen="web" aria-labelledby="web-heading" aria-hidden="true">
+        <div class="content-frame web-layout">
+          <header class="section-heading">
+            <div>
+              <span class="eyebrow">CONNECTED SPACES</span>
+              <h1 id="web-heading">Web</h1>
+            </div>
+            <span class="section-index">03</span>
+          </header>
+          <div class="web-pages" id="web-pages"></div>
+        </div>
+      </section>
+
+      <section class="screen screen--information" id="screen-information" data-screen="information" aria-labelledby="information-title" aria-hidden="true">
+        <div class="content-frame information-layout">
+          <header class="section-heading">
+            <div>
+              <span class="eyebrow">AGENT INFORMATION</span>
+              <span class="information-origin">WebMCP / LOCAL DISPLAY</span>
+            </div>
+            <button class="text-button" type="button" data-action="back">閉じる</button>
+          </header>
+          <article class="information-panel" id="information-panel" data-priority="normal" data-duration-seconds="0">
+            <div class="information-panel__marker" aria-hidden="true"><span></span></div>
+            <div class="information-panel__copy">
+              <span class="information-panel__priority" id="information-priority">NORMAL</span>
+              <h1 id="information-title">Agentからのお知らせ</h1>
+              <p id="information-message">Agentが情報を表示すると、ここに内容が表示されます。</p>
+            </div>
+            <footer class="information-panel__meta">
+              <span>DISPLAY DURATION</span>
+              <strong id="information-duration">手動で切り替えるまで</strong>
+            </footer>
+          </article>
+        </div>
+      </section>
+
+      <section class="screen screen--os" id="screen-information-os" data-screen="information-os" aria-labelledby="os-heading" aria-hidden="true">
+        <div class="content-frame os-layout">
+          <header class="os-heading">
+            <div>
+              <span class="eyebrow">INFORMATION OS</span>
+              <h1 id="os-heading"><span>触れて、</span><span>ひらく。</span></h1>
+            </div>
+            <div class="os-heading__date" id="os-date">--.--</div>
+          </header>
+
+          <nav class="tile-grid" aria-label="機能">
+            <button class="os-tile os-tile--ambient" type="button" data-route="ambient">
+              <span class="os-tile__index">01</span>
+              <span class="os-tile__icon" aria-hidden="true"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="9"/><path d="M24 4v6M24 38v6M4 24h6M38 24h6M9.9 9.9l4.2 4.2M33.9 33.9l4.2 4.2M38.1 9.9l-4.2 4.2M14.1 33.9l-4.2 4.2"/></svg></span>
+              <span class="os-tile__copy"><strong>Ambient</strong><small>静かな時間へ戻る</small></span>
+              <span class="os-tile__arrow">↗</span>
+            </button>
+            <button class="os-tile os-tile--weather" type="button" data-route="weather">
+              <span class="os-tile__index">02</span>
+              <span class="os-tile__icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M15 34h21a8 8 0 0 0 .7-16A13 13 0 0 0 12 21.5 6.5 6.5 0 0 0 15 34Z"/></svg></span>
+              <span class="os-tile__copy"><strong>Weather</strong><small id="os-weather-summary">奈良の空を確認</small></span>
+              <span class="os-tile__arrow">↗</span>
+            </button>
+            <button class="os-tile os-tile--web" type="button" data-route="web">
+              <span class="os-tile__index">03</span>
+              <span class="os-tile__icon" aria-hidden="true"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="18"/><path d="M6 24h36M24 6c5 5 8 11 8 18s-3 13-8 18c-5-5-8-11-8-18s3-13 8-18Z"/></svg></span>
+              <span class="os-tile__copy"><strong>Web</strong><small>NARA/GOへアクセス</small></span>
+              <span class="os-tile__arrow">↗</span>
+            </button>
+            <button class="os-tile os-tile--settings" type="button" data-route="settings">
+              <span class="os-tile__index">04</span>
+              <span class="os-tile__copy"><strong>Settings</strong><small>表示と動作</small></span>
+              <span class="os-tile__arrow">↗</span>
+            </button>
+          </nav>
+
+          <footer class="os-footer"><span>TAMA INFORMATION DISPLAY</span><span>v0.4.0</span></footer>
+        </div>
+      </section>
+
+      <section class="screen screen--settings" id="screen-settings" data-screen="settings" aria-labelledby="settings-heading" aria-hidden="true">
+        <div class="content-frame settings-layout">
+          <header class="section-heading">
+            <div><span class="eyebrow">SYSTEM / LOCAL</span><h1 id="settings-heading">Settings</h1></div>
+            <button class="text-button" type="button" data-action="back">戻る</button>
+          </header>
+          <div class="settings-grid">
+            <section class="settings-group">
+              <span class="settings-group__number">01</span>
+              <div class="settings-group__body">
+                <h2>Ambientへ戻る</h2>
+                <p>無操作が続いたとき、自動で静かな画面へ戻ります。</p>
+                <label class="range-control" for="idle-minutes">
+                  <span><strong id="idle-minutes-value">5</strong> 分</span>
+                  <input type="range" id="idle-minutes" min="1" max="30" step="1" value="5">
+                </label>
+              </div>
+            </section>
+            <section class="settings-group">
+              <span class="settings-group__number">02</span>
+              <div class="settings-group__body">
+                <h2>Ambientタイプ</h2>
+                <p>採用した画像から、表示したい風景のタイプを選びます。</p>
+                <label class="select-control" for="ambient-type">
+                  <span>表示するタイプ</span>
+                  <select id="ambient-type"></select>
+                </label>
+                <p class="ambient-type-summary" id="ambient-type-summary" role="status"></p>
+                <label class="range-control" for="background-minutes">
+                  <span>切替間隔 · <strong id="background-minutes-value">15</strong> 分</span>
+                  <input type="range" id="background-minutes" min="1" max="60" step="1" value="15">
+                </label>
+              </div>
+            </section>
+            <section class="settings-group settings-group--actions">
+              <span class="settings-group__number">03</span>
+              <div class="settings-group__body">
+                <h2>Display</h2>
+                <p>WindowsのF11または下のボタンで全画面表示にします。</p>
+                <button class="primary-button" type="button" id="fullscreen-button">全画面で表示</button>
+              </div>
+            </section>
+            <section class="settings-group settings-group--about">
+              <span class="settings-group__number">04</span>
+              <div class="settings-group__body">
+                <h2>About</h2>
+                <dl><div><dt>Version</dt><dd>0.4.0</dd></div><div><dt>Weather</dt><dd>Open-Meteo proxy</dd></div><div><dt>WebMCP</dt><dd>Optional adapter</dd></div><div><dt>Offline</dt><dd id="offline-ready">準備中</dd></div></dl>
+              </div>
+            </section>
+          </div>
+
+          <section class="background-library" aria-labelledby="background-library-heading">
+            <header class="background-library__heading">
+              <div>
+                <span class="eyebrow">05 / AMBIENT LIBRARY</span>
+                <h2 id="background-library-heading">背景を選ぶ。</h2>
+                <p>新しい画像は候補から始まります。採用するとAmbientに入り、不採用にしても後から戻せます。</p>
+              </div>
+              <div class="background-library__total" id="background-library-total">-- IMAGES</div>
+            </header>
+
+            <div class="background-library__tools">
+              <div class="status-filter" role="group" aria-label="審査状態で絞り込み">
+                <button type="button" data-library-status="all" aria-pressed="true">すべて <span id="status-count-all">0</span></button>
+                <button type="button" data-library-status="candidate" aria-pressed="false">候補 <span id="status-count-candidate">0</span></button>
+                <button type="button" data-library-status="accepted" aria-pressed="false">採用 <span id="status-count-accepted">0</span></button>
+                <button type="button" data-library-status="rejected" aria-pressed="false">不採用 <span id="status-count-rejected">0</span></button>
+              </div>
+              <label class="select-control select-control--compact" for="library-category">
+                <span>タイプで絞る</span>
+                <select id="library-category"></select>
+              </label>
+            </div>
+
+            <div class="background-grid" id="background-grid" aria-live="polite"></div>
+            <p class="background-library__empty" id="background-library-empty" hidden>この条件に合う画像はありません。</p>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <nav class="screen-rail" aria-label="画面切り替え">
+      <button type="button" data-route="ambient" aria-label="Ambient"><span>01</span></button>
+      <button type="button" data-route="weather" aria-label="Weather"><span>02</span></button>
+      <button type="button" data-route="web" aria-label="Web"><span>03</span></button>
+    </nav>
+
+    <div class="swipe-indicator" id="swipe-indicator" aria-hidden="true"><span></span></div>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <aside class="agent-activity" id="agent-activity" data-agent-control hidden aria-live="polite">
+      <div class="agent-activity__signal" aria-hidden="true"></div>
+      <div class="agent-activity__copy">
+        <span>AGENT ACTIVITY · <time id="agent-activity-time">--:--:--</time></span>
+        <strong id="agent-activity-text">待機中</strong>
+      </div>
+      <button type="button" id="agent-undo">元に戻す</button>
+    </aside>
+    <aside class="webmcp-debug" id="webmcp-debug" data-agent-control hidden aria-label="WebMCP Debug">
+      <strong>WEBMCP DEBUG</strong>
+      <dl>
+        <div><dt>STATUS</dt><dd id="debug-webmcp-state">CHECKING</dd></div>
+        <div><dt>TOOLS</dt><dd id="debug-webmcp-tools">0/7</dd></div>
+        <div><dt>REMOTE</dt><dd>DISABLED</dd></div>
+      </dl>
+      <div class="webmcp-debug__actions" aria-label="WebMCP Tool動作確認">
+        <button type="button" data-debug-tool="information">INFO</button>
+        <button type="button" data-debug-tool="weather">WEATHER</button>
+        <button type="button" data-debug-tool="web">WEB</button>
+        <button type="button" data-debug-tool="ambient">AMBIENT</button>
+        <button type="button" data-debug-tool="undo">UNDO</button>
+      </div>
+    </aside>
+  </div>
+
+  <dialog class="background-preview" id="background-preview" aria-labelledby="background-preview-title">
+    <div class="background-preview__image-wrap"><img id="background-preview-image" alt=""></div>
+    <div class="background-preview__panel">
+      <button class="background-preview__close" type="button" id="background-preview-close" aria-label="プレビューを閉じる">×</button>
+      <span class="eyebrow" id="background-preview-category"></span>
+      <h2 id="background-preview-title"></h2>
+      <p id="background-preview-description"></p>
+      <div class="review-actions" role="group" aria-label="この画像の審査状態">
+        <button type="button" data-preview-status="candidate">候補</button>
+        <button type="button" data-preview-status="accepted">採用</button>
+        <button type="button" data-preview-status="rejected">不採用</button>
+      </div>
+    </div>
+  </dialog>
+
+  <noscript>このアプリの表示にはJavaScriptが必要です。</noscript>
+  <script type="module" src="./js/app-v0.4-r9.js"></script>
+</body>
+</html>

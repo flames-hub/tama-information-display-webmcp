@@ -1,0 +1,13 @@
+{
+  "name": "NARA/GO — 白鳳台の交通案内",
+  "short_name": "NARA/GO",
+  "description": "白鳳台二丁目から王寺駅、カシバス、JRをすぐ確認。",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f7f5ee",
+  "theme_color": "#15202b",
+  "icons": [
+    {"src":"./icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}
+  ]
+}

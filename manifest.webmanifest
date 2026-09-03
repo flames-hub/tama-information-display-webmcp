@@ -1,0 +1,21 @@
+{
+  "name": "TAMA Information Display",
+  "short_name": "TAMA INFO",
+  "description": "普段はAmbient Display、触るとInformation OS。",
+  "id": "./",
+  "start_url": "./",
+  "scope": "./",
+  "display": "fullscreen",
+  "orientation": "landscape",
+  "background_color": "#020303",
+  "theme_color": "#050708",
+  "lang": "ja-JP",
+  "icons": [
+    {
+      "src": "./assets/icons/app-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

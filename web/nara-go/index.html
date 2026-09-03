@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#10120f">
+  <meta name="description" content="香芝市白鳳台周辺から王寺駅へ。奈良交通、カシバス、JR、高速・空港バスを一か所にまとめた個人用交通ダッシュボード。">
+  <title>NARA/GO — 白鳳台の交通案内</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@500;600;700&amp;family=Zen+Kaku+Gothic+New:wght@400;500;700;900&amp;display=swap" rel="stylesheet">
+  <link rel="icon" href="./icon.svg" type="image/svg+xml">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="stylesheet" href="./assets/styles.css?v=20260815-2">
+  <link rel="stylesheet" href="./assets/embed.css?v=0.1.0">
+  <script defer src="./assets/app.js?v=20260815-2"></script>
+  <script defer src="./assets/embed.js?v=0.1.0"></script>
+</head>
+<body>
+  <div role="note" style="padding:.55rem 1rem;background:#fff3cd;color:#3b2c00;font:700 14px/1.4 system-ui;text-align:center;">PUBLIC REPOSITORY SAMPLE — 時刻は架空のデモデータです。移動には使用しないでください。</div>
+  <a class="skip-link" href="#main">本文へ移動</a>
+
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="NARA GO トップ">
+      <span class="brand-mark" aria-hidden="true">N/G</span>
+      <span>NARA/GO</span>
+    </a>
+    <nav class="top-nav" aria-label="ページ内メニュー">
+      <a href="#bus">路線バス</a>
+      <a href="#kashibus">カシバス</a>
+      <a href="#rail">鉄道</a>
+      <a href="#travel">遠出</a>
+    </nav>
+    <div class="header-tools">
+      <a class="simple-mode-link" href="./simple.html">簡易表示</a>
+      <button class="icon-button" id="shareButton" type="button" aria-label="このページを共有">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 12v7h11V8h-4M10 5l3-3 3 3M13 2v11"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="hero-copy">
+        <p class="eyebrow">PERSONAL TRANSIT DESK · KASHIBA</p>
+        <h1><span>白鳳台から、</span><em>次の一本。</em></h1>
+        <p class="lede">王寺駅へ向かうバス、カシバス、JRの公式情報を、一つの画面で。白鳳台周辺の5停留所から迷わず出かけるための交通デスクです。</p>
+        <div class="hero-actions" aria-label="主要メニュー">
+          <a class="button button-primary" href="#bus">次のバスを見る</a>
+          <a class="button button-quiet" href="#rail">JRを確認</a>
+        </div>
+      </div>
+
+      <div class="departure-board" aria-label="現在日時">
+        <div class="board-label"><span class="pulse-dot"></span> LOCAL TIME</div>
+        <time class="clock" id="liveClock">--:--</time>
+        <p id="liveDate">----</p>
+        <div class="weatherline"><span id="heroStopName">白鳳台二丁目</span><span>→</span><span>王寺</span></div>
+      </div>
+
+      <div class="route-strip" aria-label="白鳳台住宅線の主要停留所">
+        <span class="route-no">10</span>
+        <ol>
+          <li class="active" data-route-stop="hakuhodai2"><button type="button" data-stop="hakuhodai2">白鳳台二丁目</button></li>
+          <li data-route-stop="hakuhodai2South"><button type="button" data-stop="hakuhodai2South">白鳳台二丁目南<small>一部便</small></button></li>
+          <li data-route-stop="hakuhodaiCentral"><button type="button" data-stop="hakuhodaiCentral">白鳳台中央</button></li>
+          <li data-route-stop="hakuhodai1"><button type="button" data-stop="hakuhodai1">白鳳台一丁目</button></li>
+          <li data-route-stop="hatakeda"><button type="button" data-stop="hatakeda">畠田</button></li>
+          <li class="terminal">王寺駅</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section bus-section" id="bus">
+      <div class="section-heading">
+        <div>
+          <p class="kicker">01 / DAILY ROUTE</p>
+          <h2>白鳳台住宅線</h2>
+        </div>
+        <p>路線UIサンプル<br><span id="narakotsuRevision">DEMO DATA</span></p>
+      </div>
+
+      <fieldset class="stop-selector">
+        <legend>利用する停留所</legend>
+        <div class="stop-options">
+          <button class="is-active" type="button" aria-pressed="true" data-stop="hakuhodai2"><span>01</span>白鳳台二丁目<small>初期値</small></button>
+          <button type="button" aria-pressed="false" data-stop="hakuhodaiCentral"><span>02</span>白鳳台中央</button>
+          <button type="button" aria-pressed="false" data-stop="hakuhodai1"><span>03</span>白鳳台一丁目</button>
+          <button type="button" aria-pressed="false" data-stop="hakuhodai2South"><span>04</span>白鳳台二丁目南<small>一部便のみ</small></button>
+          <button type="button" aria-pressed="false" data-stop="hatakeda"><span>05</span>畠田</button>
+        </div>
+      </fieldset>
+
+      <div class="control-rail">
+        <div class="direction-tabs" role="tablist" aria-label="方向">
+          <button class="direction-tab is-active" type="button" role="tab" aria-selected="true" data-direction="toOji">
+            <small>OUTBOUND</small> 白鳳台 → 王寺
+          </button>
+          <button class="direction-tab" type="button" role="tab" aria-selected="false" data-direction="toHakuhodai">
+            <small>RETURN</small> 王寺 → 白鳳台
+          </button>
+        </div>
+        <label class="date-control">
+          <span>日付</span>
+          <input id="serviceDate" type="date" min="2026-01-01" max="2026-12-31">
+        </label>
+      </div>
+
+      <div class="service-meta" aria-live="polite">
+        <span class="service-badge" id="serviceBadge">判定中</span>
+        <span id="serviceDescription">選択日のダイヤを確認しています</span>
+      </div>
+
+      <div class="timetable-layout">
+        <article class="next-card" id="nextCard">
+          <div class="next-label">NEXT DEPARTURE</div>
+          <div class="next-time" id="nextTime">--:--</div>
+          <div class="countdown" id="countdown">読み込み中</div>
+          <div class="next-detail">
+            <div><span>のりば</span><strong id="nextPlatform">—</strong></div>
+            <div><span>行先</span><strong id="nextDestination">—</strong></div>
+            <div class="arrival-detail"><span>到着予定</span><strong id="nextArrival">—</strong></div>
+          </div>
+          <p class="next-note" id="nextNote">到着時刻は標準所要時間による予定です。</p>
+        </article>
+
+        <div class="upcoming-panel">
+          <div class="panel-title">
+          <h3>このあとの便</h3>
+            <span id="directionLabel">白鳳台二丁目 発</span>
+          </div>
+          <ol class="upcoming-list" id="upcomingList" aria-live="polite"></ol>
+          <button class="text-button" id="toggleFull" type="button" aria-expanded="false">一日の時刻表をすべて表示</button>
+        </div>
+      </div>
+
+      <div class="full-timetable" id="fullTimetable" hidden>
+        <div class="panel-title">
+          <h3>一日の時刻表</h3>
+          <span>時刻をタップすると選択できます</span>
+        </div>
+        <div class="hour-grid" id="hourGrid"></div>
+        <div class="legend">
+          <span><i class="legend-dot north"></i>王寺駅北口</span>
+          <span><i class="legend-dot south1"></i>王寺駅南口1番</span>
+          <span><i class="legend-dot south3"></i>王寺駅南口3番</span>
+          <span><i class="legend-dot via"></i>白鳳台二丁目南経由</span>
+        </div>
+      </div>
+
+      <div class="source-bar">
+        <div><span>DEMO DATA</span><strong>架空の発車時刻サンプル</strong></div>
+        <a id="narakotsuSource" href="https://www.narakotsu.co.jp/" target="_blank" rel="noopener">実際の公式情報を確認 <span>↗</span></a>
+      </div>
+    </section>
+
+    <section class="section kashibus-section" id="kashibus">
+      <div class="section-heading light-heading">
+        <div>
+          <p class="kicker">02 / COMMUNITY LOOP</p>
+          <h2>カシバス</h2>
+        </div>
+        <p>白鳳台ルートUI<br><span id="kashibusRevision">DEMO DATA</span></p>
+      </div>
+
+      <div class="kashibus-status" id="kashibusStatus">
+        <span class="status-word">運行判定中</span>
+        <p>白鳳台二丁目南（H2）</p>
+      </div>
+
+      <div class="community-grid">
+        <article class="community-card">
+          <div class="community-card-head">
+            <span class="stop-code">H2</span>
+            <div><small>TO CITY HALL</small><h3>香芝市役所ゆき</h3></div>
+          </div>
+          <ol class="community-times community-trips" id="kashibusOutbound"></ol>
+          <p>白鳳台二丁目南 → JR志都美駅 → 総合福祉センター → 香芝市役所<br><span>到着時刻は架空のデモ値です。移動には使えません。</span></p>
+        </article>
+        <article class="community-card inverse">
+          <div class="community-card-head">
+            <span class="stop-code">KCH</span>
+            <div><small>TO HAKUHODAI</small><h3>白鳳台西ゆき</h3></div>
+          </div>
+          <ol class="community-times community-trips" id="kashibusInbound"></ol>
+          <p>香芝市役所 → 総合福祉センター → 白鳳台二丁目南 → 香芝市スポーツ公園<br><span>各停留所時刻は架空のデモ値です。移動には使えません。</span></p>
+        </article>
+      </div>
+
+      <div class="operation-notes">
+        <div><strong>100円</strong><span>1乗車 / 前払い</span></div>
+        <div><strong>木曜</strong><span>定期運休日</span></div>
+        <div><strong>PayPay</strong><span>キャッシュレス対応</span></div>
+        <a id="kashibusSource" href="https://www.city.kashiba.lg.jp/site/bus-community/index-2.html" target="_blank" rel="noopener">香芝市公式情報 ↗</a>
+      </div>
+    </section>
+
+    <section class="section rail-section" id="rail">
+      <div class="section-heading">
+        <div>
+          <p class="kicker">03 / RAIL CONNECTIONS</p>
+          <h2>JR、すぐ確認。</h2>
+        </div>
+        <p>当日の運転日・変更を<br>JR公式で確認</p>
+      </div>
+
+      <div class="station-grid">
+        <article class="station-card shizumi">
+          <div class="station-index">WAKAYAMA LINE</div>
+          <div class="station-name"><span>しずみ</span><h3>志都美</h3><b>SHIZUMI</b></div>
+          <div class="station-lines">
+            <div><span>↑</span><p><strong>王寺・天王寺・JR難波方面</strong>王寺まで2駅</p></div>
+            <div><span>↓</span><p><strong>高田・桜井・五条方面</strong>和歌山線</p></div>
+          </div>
+          <a href="https://timetable.jr-odekake.net/cgi-bin/mydia_sp.cgi?EID=0621802&amp;FN=0&amp;MD=3" target="_blank" rel="noopener">今日の時刻表を開く <span>↗</span></a>
+        </article>
+
+        <article class="station-card oji">
+          <div class="station-index">YAMATOJI / WAKAYAMA LINE</div>
+          <div class="station-name"><span>おうじ</span><h3>王寺</h3><b>OJI</b></div>
+          <div class="station-lines">
+            <div><span>→</span><p><strong>天王寺・JR難波・大阪方面</strong>大和路線</p></div>
+            <div><span>←</span><p><strong>奈良・加茂方面</strong>大和路線</p></div>
+            <div><span>↓</span><p><strong>高田・桜井・五条方面</strong>和歌山線</p></div>
+          </div>
+          <a href="https://timetable.jr-odekake.net/cgi-bin/mydia_sp.cgi?EID=0620820&amp;FN=0&amp;MD=3" target="_blank" rel="noopener">今日の時刻表を開く <span>↗</span></a>
+        </article>
+      </div>
+
+      <p class="copyright-note">JRの発車時刻は運転日によって変わり、公式サイト上の時刻データは転載・加工が禁止されています。このツールでは駅と方面を整理し、常に当日のJR西日本公式時刻表へ案内します。</p>
+    </section>
+
+    <section class="section travel-section" id="travel">
+      <div class="section-heading light-heading">
+        <div>
+          <p class="kicker">04 / NARA &amp; BEYOND</p>
+          <h2>奈良から、もっと遠くへ。</h2>
+        </div>
+        <p>路線・鉄道・空港・高速バス<br>公式入口を一か所に</p>
+      </div>
+
+      <div class="link-grid" id="travelLinks"></div>
+
+      <div class="travel-footer">
+        <p><strong>出発前の最終確認</strong> 運休・臨時変更・予約条件は、各運行会社の公式ページで確認してください。</p>
+        <span>DEMO DATA <b id="lastVerified">2026.09.03</b></span>
+      </div>
+    </section>
+
+    <section class="update-section">
+      <p class="kicker">MAINTENANCE NOTE</p>
+      <h2>年に一度、<br>データだけ更新。</h2>
+      <p>公開Challenge版は架空のJSONだけを収録しています。実運用時刻表はこの公開リポジトリに含まれません。</p>
+      <div class="update-stamps">
+        <span><b>路線サンプル</b><em id="footerNarakotsuRevision">2026.09.03</em></span>
+        <span><b>コミュニティバス例</b><em id="footerKashibusRevision">2026.09.03</em></span>
+        <span><b>デモ作成</b><em id="footerVerified">2026.09.03</em></span>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <a class="brand footer-brand" href="#top"><span class="brand-mark">N/G</span><span>NARA/GO</span></a>
+    <p>Personal mobility desk for Hakuhodai, Kashiba.</p>
+    <div class="footer-links"><a href="./simple.html">簡易表示</a><a href="#top">ページ上部へ ↑</a></div>
+  </footer>
+
+  <noscript>このツールの時刻表表示にはJavaScriptが必要です。公式情報は各リンクから確認できます。</noscript>
+</body>
+</html>

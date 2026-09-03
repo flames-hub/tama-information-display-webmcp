@@ -1,0 +1,38 @@
+/* Information Display copy only. The original /nara-go/ files remain untouched. */
+html {
+  scrollbar-color: rgba(127, 199, 189, 0.48) transparent;
+  scrollbar-width: thin;
+}
+
+body.tama-info-embedded {
+  min-height: 100dvh;
+  overscroll-behavior: contain;
+}
+
+body.tama-info-embedded a,
+body.tama-info-embedded button,
+body.tama-info-embedded input,
+body.tama-info-embedded summary {
+  touch-action: manipulation;
+}
+
+body.tama-info-embedded::after {
+  position: fixed;
+  z-index: 999;
+  right: 12px;
+  bottom: 10px;
+  padding: 6px 9px;
+  border: 1px solid rgba(127, 199, 189, 0.26);
+  background: rgba(7, 10, 11, 0.7);
+  color: rgba(240, 243, 239, 0.56);
+  font: 600 9px/1 system-ui, sans-serif;
+  letter-spacing: 0.12em;
+  pointer-events: none;
+  content: "TAMA INFO COPY";
+}
+
+@media (max-width: 560px) {
+  body.tama-info-embedded::after {
+    display: none;
+  }
+}

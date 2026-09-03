@@ -1,0 +1,33 @@
+{
+  "appName": "TAMA Information Display",
+  "version": "0.4.0",
+  "defaultScreen": "ambient",
+  "ambientReturnMinutes": 5,
+  "backgroundChangeMinutes": 15,
+  "weatherRefreshMinutes": 30,
+  "pixelShiftSeconds": 120,
+  "weatherEndpoint": "./api/weather.php",
+  "backgroundCatalogEndpoint": "./data/backgrounds.json",
+  "weatherLocation": {
+    "name": "奈良市",
+    "latitude": 34.6851,
+    "longitude": 135.8048,
+    "timezone": "Asia/Tokyo"
+  },
+  "backgrounds": [
+    "./assets/backgrounds/library/towns/town-01.webp",
+    "./assets/backgrounds/library/resorts/resort-01.webp",
+    "./assets/backgrounds/library/aurora/aurora-01.webp"
+  ],
+  "webPages": [
+    {
+      "id": "nara-go",
+      "name": "NARA/GO",
+      "description": "通常表示とシンプル表示を切り替えられる、Information Display専用コピー。",
+      "url": "./web/nara-go/index.html",
+      "sourceUrl": "https://tama-hub.xvps.jp/nara-go/",
+      "displayMode": "iframe",
+      "statusNote": "元のNARA/GOは変更せず、/tama-info/配下のコピーを表示します。"
+    }
+  ]
+}

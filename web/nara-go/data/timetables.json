@@ -1,0 +1,177 @@
+{
+  "dataset": "synthetic-challenge-sample",
+  "warning": "Fictional demonstration times. Do not use for travel.",
+  "verified": "2026-09-03",
+  "calendar": {
+    "year": 2026,
+    "holidays": []
+  },
+  "narakotsu": {
+    "revision": "2026-09-03",
+    "stops": {
+      "hakuhodai2": {
+        "name": "白鳳台二丁目",
+        "shortName": "二丁目",
+        "toOjiOffsetMinutes": 0,
+        "arrivalOffsets": {
+          "toOji": { "north80": 20, "south10": 16 },
+          "toHakuhodai": { "north80": 18, "south10": 15, "viaSouth": 19 }
+        },
+        "sources": {
+          "toOji": "https://www.narakotsu.co.jp/",
+          "toHakuhodai": "https://www.narakotsu.co.jp/"
+        }
+      },
+      "hakuhodaiCentral": {
+        "name": "白鳳台中央",
+        "shortName": "中央",
+        "toOjiOffsetMinutes": 1,
+        "arrivalOffsets": {
+          "toOji": { "north80": 19, "south10": 17 },
+          "toHakuhodai": { "north80": 13, "south10": 11, "viaSouth": 12 }
+        },
+        "sources": {
+          "toOji": "https://www.narakotsu.co.jp/",
+          "toHakuhodai": "https://www.narakotsu.co.jp/"
+        }
+      },
+      "hakuhodai1": {
+        "name": "白鳳台一丁目",
+        "shortName": "一丁目",
+        "toOjiOffsetMinutes": 2,
+        "arrivalOffsets": {
+          "toOji": { "north80": 18, "south10": 13 },
+          "toHakuhodai": { "north80": 12, "south10": 10, "viaSouth": 11 }
+        },
+        "sources": {
+          "toOji": "https://www.narakotsu.co.jp/",
+          "toHakuhodai": "https://www.narakotsu.co.jp/"
+        }
+      },
+      "hakuhodai2South": {
+        "name": "白鳳台二丁目南",
+        "shortName": "二丁目南",
+        "toOjiAvailable": false,
+        "toHakuhodaiViaSouthOnly": true,
+        "arrivalOffsets": {
+          "toOji": {},
+          "toHakuhodai": { "viaSouth": 12 }
+        },
+        "sources": {
+          "toOji": "https://www.narakotsu.co.jp/",
+          "toHakuhodai": "https://www.narakotsu.co.jp/"
+        }
+      },
+      "hatakeda": {
+        "name": "畠田",
+        "shortName": "畠田",
+        "toOjiOffsetMinutes": 4,
+        "arrivalOffsets": {
+          "toOji": { "north80": 16, "south10": 12 },
+          "toHakuhodai": { "north80": 9, "south10": 7, "viaSouth": 8 }
+        },
+        "sources": {
+          "toOji": "https://www.narakotsu.co.jp/",
+          "toHakuhodai": "https://www.narakotsu.co.jp/"
+        }
+      }
+    },
+    "directions": {
+      "toOji": {
+        "departure": "白鳳台二丁目 発",
+        "destination": "王寺駅",
+        "defaultPlatform": "白鳳台二丁目",
+        "note": "DEMO系統・synthetic sample",
+        "source": "https://www.narakotsu.co.jp/",
+        "schedules": {
+          "weekday": [
+            { "time": "06:10", "note": "DEMO 80系統" },
+            { "time": "07:25" },
+            { "time": "08:40" },
+            { "time": "10:05" },
+            { "time": "12:30" },
+            { "time": "15:00" },
+            { "time": "17:20" },
+            { "time": "19:45" },
+            { "time": "21:15" }
+          ],
+          "weekend": [
+            { "time": "06:45", "note": "DEMO 80系統" },
+            { "time": "08:15" },
+            { "time": "10:45" },
+            { "time": "13:15" },
+            { "time": "16:15" },
+            { "time": "18:45" },
+            { "time": "21:00" }
+          ]
+        }
+      },
+      "toHakuhodai": {
+        "departure": "王寺駅 発",
+        "destination": "白鳳台二丁目",
+        "defaultPlatform": "南口デモ",
+        "note": "DEMO系統・synthetic sample",
+        "source": "https://www.narakotsu.co.jp/",
+        "schedules": {
+          "weekday": [
+            { "time": "07:07", "platform": "北口", "note": "DEMO 80系統" },
+            { "time": "08:30" },
+            { "time": "10:00", "viaSouth": true },
+            { "time": "12:30", "viaSouth": true },
+            { "time": "15:30" },
+            { "time": "18:00" },
+            { "time": "20:30" },
+            { "time": "22:00" }
+          ],
+          "saturday": [
+            { "time": "07:30", "platform": "北口", "note": "DEMO 80系統" },
+            { "time": "09:00" },
+            { "time": "11:30", "viaSouth": true },
+            { "time": "14:30" },
+            { "time": "17:30" },
+            { "time": "20:30" }
+          ],
+          "holiday": [
+            { "time": "08:00", "platform": "北口", "note": "DEMO 80系統" },
+            { "time": "10:30" },
+            { "time": "13:00", "viaSouth": true },
+            { "time": "16:00" },
+            { "time": "19:00" },
+            { "time": "21:30" }
+          ]
+        }
+      }
+    }
+  },
+  "kashibus": {
+    "revision": "2026-09-03",
+    "source": "https://www.city.kashiba.lg.jp/",
+    "stop": "白鳳台二丁目南",
+    "outbound": ["08:20", "11:20", "14:20"],
+    "outboundTrips": [
+      { "departure": "08:20", "welfareCenter": "08:50", "cityHall": "09:00" },
+      { "departure": "11:20", "welfareCenter": "11:50", "cityHall": "12:00" },
+      { "departure": "14:20", "welfareCenter": "14:50", "cityHall": "15:00" }
+    ],
+    "inbound": ["09:37", "12:37", "15:37"],
+    "inboundTrips": [
+      { "departure": "09:37", "welfareCenter": "09:47", "hakuhodai2South": "10:17", "sportsPark": "10:27" },
+      { "departure": "12:37", "welfareCenter": "12:47", "hakuhodai2South": "13:17", "sportsPark": "13:27" },
+      { "departure": "15:37", "welfareCenter": "15:47", "hakuhodai2South": "16:17", "sportsPark": "16:27" }
+    ]
+  },
+  "travelLinks": [
+    {
+      "category": "DEMO DATA",
+      "title": "NARA/GO live application",
+      "description": "Public repository schedules are fictional samples. Check live sources before travel.",
+      "url": "https://tama-hub.xvps.jp/nara-go/"
+    },
+    {
+      "category": "PROJECT",
+      "title": "TAMA Information Display",
+      "description": "Return to the WebMCP-enabled display.",
+      "url": "https://tama-hub.xvps.jp/tama-info/"
+    }
+  ]
+}

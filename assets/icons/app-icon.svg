@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title">
+  <title id="title">TAMA Information Display</title>
+  <rect width="512" height="512" rx="108" fill="#030505"/>
+  <path d="M95 112h322M95 400h322" stroke="#7fc7bd" stroke-width="14" stroke-linecap="square"/>
+  <path d="M176 169h160M256 169v174" stroke="#f0f3ef" stroke-width="42" stroke-linecap="square"/>
+  <circle cx="397" cy="112" r="11" fill="#c8ad78"/>
+</svg>
