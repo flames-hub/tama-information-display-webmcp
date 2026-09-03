@@ -1,0 +1,57 @@
+1
+00:00:00,350 --> 00:00:08,650
+TAMA Information Display is an ambient information display for a four K OLED touch
+screen, now enhanced with WebMCP.
+
+2
+00:00:09,350 --> 00:00:21,650
+The page registers seven tools through a thin adapter. The agent reads the real
+display state instead of guessing, while the original touch interface remains
+unchanged.
+
+3
+00:00:22,350 --> 00:00:29,650
+First, we type: Show the weather in Nara.
+
+4
+00:00:30,350 --> 00:00:43,650
+The WebMCP host invokes show weather. The tool reuses the existing weather controller
+and router, and the visible display immediately changes to Weather.
+
+5
+00:00:44,350 --> 00:00:51,650
+Next, we type: Show Nara Go.
+
+6
+00:00:52,350 --> 00:01:07,650
+Open web page validates the requested URL, maps it to the bundled same origin copy,
+and switches the display to Web. The original and simple views remain available.
+
+7
+00:01:08,350 --> 00:01:15,650
+Now we type: Display a meeting from one P M.
+
+8
+00:01:16,350 --> 00:01:31,650
+Show information renders the title and message as safe text, with priority and
+duration metadata. Agent Activity makes the action visible and undoable.
+
+9
+00:01:32,350 --> 00:01:39,650
+Finally, we type: Return to the original screen.
+
+10
+00:01:40,350 --> 00:01:53,650
+Show ambient restores the quiet clock and the human selected ambient category. The
+result comes directly from the display controller.
+
+11
+00:01:54,350 --> 00:02:08,650
+This adapter is feature detected. Browsers without document dot model context skip
+registration safely, and manual human changes always outrank agent actions and
+automatic defaults.
+
+12
+00:02:09,350 --> 00:02:17,650
+TAMA Information Display. One shared screen, controlled transparently by people and
+agents.

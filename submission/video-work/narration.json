@@ -1,0 +1,94 @@
+[
+  {
+    "id": "title",
+    "duration": 9,
+    "action": "title",
+    "narration": "TAMA Information Display is an ambient information display for a four K OLED touch screen, now enhanced with WebMCP."
+  },
+  {
+    "id": "status",
+    "duration": 13,
+    "action": "status",
+    "narration": "The page registers seven tools through a thin adapter. The agent reads the real display state instead of guessing, while the original touch interface remains unchanged."
+  },
+  {
+    "id": "weather-prompt",
+    "duration": 8,
+    "action": "prompt",
+    "prompt": "奈良の天気を表示して",
+    "narration": "First, we type: Show the weather in Nara."
+  },
+  {
+    "id": "weather-tool",
+    "duration": 14,
+    "action": "tool",
+    "tool": "show_weather",
+    "input": { "location": "奈良" },
+    "narration": "The WebMCP host invokes show weather. The tool reuses the existing weather controller and router, and the visible display immediately changes to Weather."
+  },
+  {
+    "id": "nara-go-prompt",
+    "duration": 8,
+    "action": "prompt",
+    "prompt": "奈良Goを表示して",
+    "narration": "Next, we type: Show Nara Go."
+  },
+  {
+    "id": "nara-go-tool",
+    "duration": 16,
+    "action": "tool",
+    "tool": "open_web_page",
+    "input": {
+      "url": "https://tama-hub.xvps.jp/nara-go/simple.html",
+      "title": "NARA/GO · SIMPLE"
+    },
+    "narration": "Open web page validates the requested URL, maps it to the bundled same origin copy, and switches the display to Web. The original and simple views remain available."
+  },
+  {
+    "id": "information-prompt",
+    "duration": 8,
+    "action": "prompt",
+    "prompt": "13時から会議と表示して",
+    "narration": "Now we type: Display a meeting from one P M."
+  },
+  {
+    "id": "information-tool",
+    "duration": 16,
+    "action": "tool",
+    "tool": "show_information",
+    "input": {
+      "title": "13時から会議",
+      "message": "会議室Aで行います。",
+      "priority": "high",
+      "duration_seconds": 0
+    },
+    "narration": "Show information renders the title and message as safe text, with priority and duration metadata. Agent Activity makes the action visible and undoable."
+  },
+  {
+    "id": "ambient-prompt",
+    "duration": 8,
+    "action": "prompt",
+    "prompt": "元の画面に戻して",
+    "narration": "Finally, we type: Return to the original screen."
+  },
+  {
+    "id": "ambient-tool",
+    "duration": 14,
+    "action": "tool",
+    "tool": "show_ambient",
+    "input": {},
+    "narration": "Show ambient restores the quiet clock and the human selected ambient category. The result comes directly from the display controller."
+  },
+  {
+    "id": "safety",
+    "duration": 15,
+    "action": "safety",
+    "narration": "This adapter is feature detected. Browsers without document dot model context skip registration safely, and manual human changes always outrank agent actions and automatic defaults."
+  },
+  {
+    "id": "outro",
+    "duration": 9,
+    "action": "outro",
+    "narration": "TAMA Information Display. One shared screen, controlled transparently by people and agents."
+  }
+]

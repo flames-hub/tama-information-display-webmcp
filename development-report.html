@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>TAMA Information Display v0.4 — Development Report</title>
+  <style>
+    :root{--black:#050707;--ink:#0c1011;--paper:#f3f1e9;--white:#fff;--text:#17201e;--muted:#69726f;--line:#cfd3cc;--cyan:#6ab9ae;--amber:#b8955e;font-family:Inter,"Noto Sans JP","Yu Gothic UI",system-ui,sans-serif;color:var(--text);background:var(--paper)}*{box-sizing:border-box}body{margin:0;background:var(--paper);line-height:1.75}a{color:inherit}.hero{position:relative;min-height:72vh;display:flex;flex-direction:column;justify-content:space-between;padding:clamp(28px,5vw,80px);overflow:hidden;background:linear-gradient(90deg,rgba(1,3,3,.92),rgba(1,3,3,.26)),url("./assets/backgrounds/library/towns/town-01.webp") center/cover;color:var(--white)}.hero:after{position:absolute;inset:0;background:linear-gradient(transparent 60%,rgba(0,0,0,.8));content:""}.hero>*{position:relative;z-index:1}.topline{display:flex;justify-content:space-between;font-size:11px;letter-spacing:.2em}.hero-copy{max-width:1050px;margin-top:12vh}.kicker{margin:0 0 20px;color:var(--cyan);font-size:11px;font-weight:700;letter-spacing:.2em}.hero h1{max-width:900px;margin:0;font-size:clamp(56px,9vw,150px);font-weight:250;line-height:.88;letter-spacing:-.07em}.hero h1 span{display:block;color:rgba(255,255,255,.5)}.hero-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-top:clamp(54px,10vh,120px);background:rgba(255,255,255,.25)}.hero-summary div{padding:22px;background:rgba(2,4,4,.62);backdrop-filter:blur(10px)}.hero-summary b{display:block;font-size:clamp(25px,3vw,48px);font-weight:300}.hero-summary span{font-size:10px;letter-spacing:.15em;color:rgba(255,255,255,.58)}main{max-width:1440px;margin:auto;padding:clamp(70px,10vw,150px) clamp(22px,6vw,84px)}.intro{display:grid;grid-template-columns:.65fr 1.35fr;gap:8vw;margin-bottom:130px}.intro h2,.section-title{margin:0;font-size:clamp(36px,5vw,78px);font-weight:300;line-height:1.05;letter-spacing:-.05em}.intro p{margin:0;color:var(--muted);font-size:clamp(16px,1.5vw,22px)}section.report-section{padding:90px 0;border-top:1px solid var(--line)}.section-head{display:flex;justify-content:space-between;gap:30px;align-items:end;margin-bottom:45px}.section-no{color:var(--amber);font-size:11px;letter-spacing:.2em}.architecture{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}.architecture article{min-height:220px;padding:28px;background:var(--paper)}.architecture small{color:var(--amber);font-weight:700;letter-spacing:.15em}.architecture h3{margin:50px 0 10px;font-size:23px;font-weight:450}.architecture p,.feature p,.fact-list dd{color:var(--muted);font-size:13px}.feature-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}.feature{padding:38px;background:var(--paper)}.feature h3{margin:0 0 10px;font-size:22px;font-weight:450}.feature b{color:var(--cyan);font-size:11px;letter-spacing:.14em}.dark-band{margin:90px 0;padding:clamp(70px,8vw,130px) clamp(24px,7vw,100px);background:var(--black);color:var(--white)}.dark-band .section-title{max-width:800px}.flow{display:grid;grid-template-columns:repeat(5,1fr);margin-top:60px;border-top:1px solid rgba(255,255,255,.2)}.flow div{position:relative;padding:26px 20px 0 0}.flow div:not(:last-child):after{position:absolute;top:-4px;right:12px;color:var(--cyan);content:"→"}.flow span{display:block;color:var(--cyan);font-size:10px}.flow b{font-weight:400}.fact-list{margin:0}.fact-list div{display:grid;grid-template-columns:minmax(150px,.5fr) 1.5fr;gap:25px;padding:20px 0;border-bottom:1px solid var(--line)}.fact-list dt{font-weight:700}.fact-list dd{margin:0}.test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.test{padding:25px;border:1px solid var(--line);background:rgba(255,255,255,.32)}.test strong{display:flex;justify-content:space-between}.test strong:after{color:#397a63;content:"PASS";font-size:10px;letter-spacing:.15em}.test span{color:var(--muted);font-size:12px}.known{padding:28px;border-left:3px solid var(--amber);background:#e9e3d7}.report-footer{display:flex;justify-content:space-between;gap:20px;padding:28px clamp(22px,6vw,80px);background:var(--ink);color:rgba(255,255,255,.65);font-size:10px;letter-spacing:.13em}@media(max-width:760px){.hero{min-height:82vh}.hero-summary{grid-template-columns:1fr}.intro{grid-template-columns:1fr;gap:30px}.architecture,.feature-grid,.test-grid{grid-template-columns:1fr}.architecture article{min-height:180px}.flow{grid-template-columns:1fr}.flow div:not(:last-child):after{display:none}.fact-list div{grid-template-columns:1fr;gap:5px}.section-head{align-items:start;flex-direction:column}.report-footer{flex-direction:column}}@media print{.hero{min-height:520px}.dark-band{margin-left:0;margin-right:0}.report-section{break-inside:avoid}}
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="topline"><span>DEVELOPMENT REPORT / 2026.09.03</span><span>VERSION 0.4.0</span></div>
+    <div class="hero-copy"><p class="kicker">TAMA INFORMATION DISPLAY</p><h1>静かな画面。<span>触れると、OS。</span></h1></div>
+    <div class="hero-summary"><div><b>7</b><span>WEBMCP TOOLS</span></div><div><b>95 × 4K</b><span>LOCAL AMBIENT LIBRARY</span></div><div><b>H &gt; A</b><span>HUMAN FIRST CONTROL</span></div></div>
+  </header>
+  <main>
+    <section class="intro"><h2>壁に置いて、<br>Agentとも使う。</h2><p>v0.4は、既存のHuman UIを保ったままWebMCPを任意Adapterとして追加した。7つの意味のあるToolが同じRouter、Ambient、Weather、WebViewを再利用する。手動操作を最優先し、AgentのUndoや時間切れ復帰が人間の選んだ表示を戻さない。</p></section>
+
+    <section class="report-section">
+      <div class="section-head"><div><p class="kicker">01 / ARCHITECTURE</p><h2 class="section-title">小さく、交換可能。</h2></div><span class="section-no">NO FRAMEWORK</span></div>
+      <div class="architecture"><article><small>VIEW</small><h3>Semantic HTML</h3><p>通常UIとAgent Informationを1つのアプリシェルで管理。初期表示はAmbient。</p></article><article><small>FACADE</small><h3>Display Controller</h3><p>操作元とUndoだけを管理し、Router、Ambient、Weather、WebViewへ委譲。</p></article><article><small>ADAPTER</small><h3>Optional WebMCP</h3><p>feature detectionと登録失敗隔離。削除しても既存UIは成立する。</p></article><article><small>STATE</small><h3>Human First</h3><p>手動revisionより古いAgent復帰を拒否し、Remote通信は標準無効。</p></article></div>
+    </section>
+
+    <section class="report-section">
+      <div class="section-head"><div><p class="kicker">02 / IMPLEMENTATION</p><h2 class="section-title">v0.4の中核。</h2></div></div>
+      <div class="feature-grid"><article class="feature"><b>WEBMCP</b><h3>7つの意味あるTool</h3><p>状態、画面、Web、Information、Weather、Ambient、Undoをアプリの操作として公開。</p></article><article class="feature"><b>INFORMATION</b><h3>Agentの言葉を画面へ</h3><p>長さと優先度を検証し、任意内容をtextContentだけで大きく表示。</p></article><article class="feature"><b>HUMAN FIRST</b><h3>手動状態を戻さない</h3><p>Agent後のタップ、キー、スワイプ、埋め込み操作を検知し、復帰とUndoを無効化。</p></article><article class="feature"><b>SAFE WEB</b><h3>許可済みコピーへ写像</h3><p>NARA/GOの通常・simple URLだけを同一オリジンコピーへ結び、危険なschemeを拒否。</p></article></div>
+    </section>
+
+    <section class="dark-band">
+      <p class="kicker">03 / INTERACTION FLOW</p><h2 class="section-title">指一本で、迷わない。</h2>
+      <div class="flow"><div><span>START</span><b>Ambient</b></div><div><span>SWIPE LEFT</span><b>Weather</b></div><div><span>SWIPE LEFT</span><b>Web / NARA/GO</b></div><div><span>SWIPE UP</span><b>Information OS</b></div><div><span>5 MIN IDLE</span><b>Ambient</b></div></div>
+    </section>
+
+    <section class="report-section">
+      <div class="section-head"><div><p class="kicker">04 / RESILIENCE & OLED</p><h2 class="section-title">止まっても、壊れない。</h2></div></div>
+      <dl class="fact-list"><div><dt>Network offline</dt><dd>背景と時計はローカル動作。Service Workerがアプリ、既存背景、閲覧済み画像、NARA/GOコピーを保持する。</dd></div><div><dt>Weather failure</dt><dd>10分サーバーキャッシュ、最大6時間のstale cache、ブラウザ最終成功データの順で縮退する。</dd></div><div><dt>Pixel shift</dt><dd>時計・日付を2〜8pxの範囲で周期移動。システム表示も微細に位置を変える。</dd></div><div><dt>Review state</dt><dd>生成95枚のうち記録済み3枚を採用、残り92枚を候補から開始。審査状態とタイプは端末内だけに保存する。</dd></div><div><dt>Motion</dt><dd>オーロラ3枚だけにCSS motionを適用し、視差効果を減らす設定では静止する。</dd></div><div><dt>Performance</dt><dd>一覧は640×360サムネイルを遅延読込し、4K本体は表示・プレビュー時だけ取得する。</dd></div></dl>
+    </section>
+
+    <section class="report-section">
+      <div class="section-head"><div><p class="kicker">05 / VERIFICATION</p><h2 class="section-title">必要十分な確認。</h2></div></div>
+      <div class="test-grid"><div class="test"><strong>Static verify</strong><span>35必須ファイル・JavaScript構文14件</span></div><div class="test"><strong>Unit contracts</strong><span>WebMCP、URL、Undo、手動優先9件</span></div><div class="test"><strong>In-app browser</strong><span>WebMCP 7/7登録を検出</span></div><div class="test"><strong>Fallback browser</strong><span>UNSUPPORTED 0/7・通常UI継続</span></div><div class="test"><strong>Narrow render</strong><span>375 × 812・横overflowなし</span></div><div class="test"><strong>Runtime network</strong><span>主要4リクエスト200・console error 0</span></div></div>
+    </section>
+
+    <section class="report-section">
+      <div class="section-head"><div><p class="kicker">06 / KNOWN LIMITS</p><h2 class="section-title">次へ残した余白。</h2></div></div>
+      <div class="known">v0.4は本番へ反映し、公開URLでHTTP 200、ChatGPT in-app browserで7/7 Tool登録と主要画面変更を実測した。通常ChromeではWebMCP非対応でもHuman UIが継続する。Remote syncは認証と競合制御がない状態で手動表示を上書きしないよう、明示的にdisabledとしている。</div>
+    </section>
+  </main>
+  <footer class="report-footer"><span>TAMA INFORMATION DISPLAY</span><span>DEVELOPMENT REPORT / v0.4.0</span></footer>
+</body>
+</html>
