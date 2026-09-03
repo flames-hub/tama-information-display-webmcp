@@ -31,20 +31,20 @@ v0.4は`disabled`。通常起動時の同期通信は0で、外部状態によ�
 - v0.4 entry / Router / WebView / Config: `js/app-v0.4-r9.js`ほか
 - UI: `index.html`、`css/app-v0.4.css`
 - Test: `tests/*.test.mjs`、`scripts/verify.mjs`
-- Docs: `README.md`、`WEBMCP_CHALLENGE.md`、`DEVPOST_SUBMISSION.md`、`DEMO_VIDEO_SCRIPT.md`、`LICENSE`
+- Docs: `README.md`、`WEBMCP_CHALLENGE.md`、`submission/devpost-submission-en.md`、`submission/challenge-demo-narration-en.md`、`LICENSE`
 - 既存の未コミットv0.3画像追加一式は保持した。
 
 ## 8. Git commit一覧
 
-Challenge公開版は、private運用履歴を含めないclean historyとして作成した。動作コードのroot commitは`c9451b1 feat(webmcp): publish human-first TAMA challenge build`。提出文書は別commitに分け、Challenge期間中の追加内容を追跡可能にする。
+Challenge公開版は、private運用履歴を含めない4コミットのclean historyとして作成した。動作コードのroot commitは`c9451b1 feat(webmcp): publish human-first TAMA challenge build`。提出文書、公開データ安全化、最終release evidenceを別commitに分け、Challenge期間中の追加内容を追跡可能にした。
 
 ## 9. 実施した最小テスト
 
-- `npm run verify`: PASS。必須35ファイル、JS構文14件、Node test 9件。
+- `npm run verify`: PASS。必須35ファイル、JS構文14件、Node test 10件。
 - `php -l api/weather.php`: PASS。
 - `git diff --check`: whitespace errorなし。
-- 375 × 812: 横overflowなし。
-- 通常ブラウザ: console error 0、主要4通信200、WebMCP `UNSUPPORTED / 0/7`。同一オリジンの信頼済みNARA/GOコピーでscriptとローカルJSONを使うため、iframe sandboxの`allow-scripts` + `allow-same-origin`警告が1件残る。
+- 1920 × 1080 / 375 × 812: 横overflowなし、console error 0、page error 0。通常→Weather→NARA/GO通常→simpleを手動操作で確認。
+- WebMCP非対応ブラウザ: `document.modelContext`なしで登録を安全にスキップし、通常UIが継続。
 - ChatGPT in-app browser: 公開URLでWebMCP Tool登録`AVAILABLE / 7/7`をネイティブ検出。同じTool callbackでWeather / NARA/GO Web / Information / Ambientの実画面変更を確認。
 
 ## 10. 公開URL
@@ -61,7 +61,7 @@ Challenge専用のclean repositoryを<https://github.com/flames-hub/tama-informa
 
 ## 13. Chrome WebMCP確認結果
 
-通常Chromeの現行検証環境では`document.modelContext`なし、`UNSUPPORTED / 0/7`。通常UIは動作し、console errorは0。WebMCP有効flag / origin trial環境は未確認。
+通常ブラウザの非対応環境では`document.modelContext`なしで登録を安全にスキップし、通常UI、Weather、Web、NARA/GO normal/simpleが動作した。WebMCP対応確認はChatGPT in-app browserで実施し、公開URLで`AVAILABLE / 7/7`を確認した。
 
 ## 14. セキュリティ確認
 
@@ -77,7 +77,7 @@ YouTubeでのPublic公開、発行URLのDevpost入力、応募者適格性の本
 
 ## 17. Devpost提出英文
 
-`DEVPOST_SUBMISSION.md`に英語本文と日本語参考訳を収録。
+`submission/devpost-submission-en.md`に英語本文、`submission/devpost-submission-ja.md`に日本語参考訳を収録。
 
 ## 18. 3分動画台本
 

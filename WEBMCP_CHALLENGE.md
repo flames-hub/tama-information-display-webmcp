@@ -76,6 +76,6 @@ php -S 127.0.0.1:8787 -t .
 - [x] 入力検証、URL allowlist、`textContent`
 - [x] README、MIT LICENSE、Challenge文書、Devpost文、3分台本
 - [x] v0.4の本番デプロイと公開URL実測
-- [ ] GitHubリポジトリのpublic化（clean history準備済み）
+- [x] GitHubリポジトリのpublic化、clean history、MIT検出
 - [x] ChatGPT in-app browserでのネイティブTool実測
 - [x] WebMCP非対応Chromeで通常UIが継続することを実測

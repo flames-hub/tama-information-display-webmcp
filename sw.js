@@ -1,5 +1,5 @@
 const CACHE_PREFIX = "tama-info-";
-const CACHE_NAME = "tama-info-v0.4.0-r10-synthetic";
+const CACHE_NAME = "tama-info-v0.4.0-r11-final";
 const PRECACHE = [
   "./",
   "./index.html",

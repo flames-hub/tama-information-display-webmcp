@@ -4,6 +4,7 @@ export class AmbientController {
     this.layers = [...document.querySelectorAll("[data-background-layer]")];
     this.activeLayer = 0;
     this.backgroundId = null;
+    this.backgroundRequestRevision = 0;
     this.backgroundTimer = null;
     this.motionCleanupTimer = null;
     this.clockTimer = null;
@@ -72,6 +73,7 @@ export class AmbientController {
   }
 
   changeBackground() {
+    const requestRevision = ++this.backgroundRequestRevision;
     const backgrounds = this.availableImages();
     if (!backgrounds.length || !this.layers.length) return;
     let nextIndex = Math.floor(Math.random() * backgrounds.length);
@@ -80,6 +82,7 @@ export class AmbientController {
     const image = new Image();
     image.decoding = "async";
     image.onload = () => {
+      if (requestRevision !== this.backgroundRequestRevision) return;
       const nextLayer = this.activeLayer === 0 ? 1 : 0;
       const previousLayer = this.activeLayer;
       this.layers[nextLayer].style.backgroundImage = `url("${nextBackground.src}")`;

@@ -227,6 +227,9 @@ try {
   } finally {
     $ErrorActionPreference = $previousErrorPreference
   }
+  # `ffmpeg -i` exits with 1 when used only as a metadata probe. The output is
+  # validated below, so do not leak that expected probe status to callers.
+  $global:LASTEXITCODE = 0
   $durationMatch = [regex]::Match($probeOutput, "Duration:\s*(\d{2}:\d{2}:\d{2}\.\d+)")
   $videoCodecPresent = $probeOutput -match "Video:\s*h264"
   $audioCodecPresent = $probeOutput -match "Audio:\s*aac"

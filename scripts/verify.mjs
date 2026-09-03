@@ -144,8 +144,11 @@ const publicNaraGoSources = ["web/nara-go/assets/app-public.js", "web/nara-go/as
 if (!publicNaraGoSources.includes("Public build refused non-synthetic timetable data")) errors.push("public timetable consumer must fail closed");
 
 const serviceWorker = readFileSync(join(root, "sw.js"), "utf8");
-if (!serviceWorker.includes('CACHE_NAME = "tama-info-v0.4.0-r10-synthetic"')) errors.push("synthetic release cache name missing");
+if (!serviceWorker.includes('CACHE_NAME = "tama-info-v0.4.0-r11-final"')) errors.push("final release cache name missing");
 if (serviceWorker.includes("caches.match(request")) errors.push("service worker must not search stale caches across releases");
+
+const ambientController = readFileSync(join(root, "js/ambient-v0.3.js"), "utf8");
+if (!ambientController.includes("backgroundRequestRevision")) errors.push("ambient background race guard missing");
 
 const adapter = readFileSync(join(root, "js/webmcp-adapter-v0.4.js"), "utf8");
 if (!adapter.includes('documentRef?.modelContext')) errors.push("WebMCP feature detection missing");
